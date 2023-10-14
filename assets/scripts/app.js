@@ -11,15 +11,27 @@ const LOG_EVENT_MONSTER_ATTACK = 'MONSTER_ATTACK';
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL';
 const LOG_EVENT_GAME_OVER = 'GAME_OVER';
 
-const enterValue = prompt('Maximun Life for you and the Monster','100');
+// const enterValue = prompt('Maximun Life for you and the Monster','100');
 
 
-let chosenMaxLife = parseInt(enterValue);
+// let chosenMaxLife = parseInt(enterValue);
 let battleLog =[];
 
-if(isNaN(enterValue) || enterValue <= 0) {
-    chosenMaxLife = 100;
+// if(isNaN(enterValue) || enterValue <= 0) {
+//     chosenMaxLife = 100;
+// }
+function getMAXLifeValue(){
+    const enterValue = prompt('Maximun Life for you and the Monster','100');
+
+    const parsedValue = parseInt(enterValue);
+    if(isNaN(parsedValue) || parsedValue <= 0) {
+        throw { message : 'Invaild user input, not a number!'};
+    }
+    return parsedValue;
 }
+
+let chosenMaxLife = getMAXLifeValue();
+
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let hasBonusLife = true;
@@ -208,12 +220,24 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
+    let j = 0;
+    while(j<3){
+        console.log('---------');
+        j++;
+    }
     // for(let i = 0; i < battleLog.length; i++){
     //     console.log(battleLog[i]);
     // }
-    for(const logentry of battleLog){
-        console.log(logentry);
-}
+    // for(const logEntry of battleLog){
+    //     console.log(logEntry);       
+    // }
+    // for(const logEntry of battle){
+    //     console.log(`#${i}`);
+    //     for(const key in logEntry){
+    //         console.log(`${key} => ${logEntry[key]}`);
+    //     }
+    //     i++;
+    // }
 }
 
 
